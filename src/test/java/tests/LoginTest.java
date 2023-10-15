@@ -1,9 +1,6 @@
 package tests;
 
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
@@ -14,18 +11,15 @@ import utils.ScreenshotUtils;
 
 import java.io.IOException;
 
-public class LoginTest {
-    private WebDriver driver;
+public class LoginTest extends TestBase {
     private LoginPage loginPage;
 
     @BeforeMethod
-    public void setup() {
-        System.setProperty("webdriver.chrome.driver", "/Users/jomjose/Documents/SeleniumProjects/ChromeDriver/chromedriver");
-        driver = new ChromeDriver();
+    public void setupLoginPage() {
         driver.get("https://the-internet.herokuapp.com/login");
         loginPage = new LoginPage(driver);
-        
-     // Capture screenshot before signing in
+
+        // Capture screenshot before signing in
         ScreenshotUtils.captureScreenshot(driver, "beforeSignIn");
     }
 
@@ -37,9 +31,8 @@ public class LoginTest {
         loginPage.clickLoginButton();
 
         // Add assertions here to verify the success of the login process
-       
-        
-     // Capture screenshot after signing in
+
+        // Capture screenshot after signing in
         ScreenshotUtils.captureScreenshot(driver, "afterSignIn");
     }
 
@@ -57,8 +50,7 @@ public class LoginTest {
         return data;
     }
 
-    
-	@AfterMethod
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }
